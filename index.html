@@ -134,7 +134,7 @@
 
             <!-- Waitlist Capture -->
             <div id="waitlist" class="w-full max-w-md mx-auto glass-panel p-2 rounded-2xl flex flex-col sm:flex-row items-center shadow-2xl shadow-primary/10 scroll-mt-40 mb-6">
-                <input type="email" placeholder="Enter your email address" class="w-full bg-transparent border-none focus:outline-none text-white px-4 py-3 sm:py-2 placeholder-gray-500" required>
+                <input id="waitlistEmail" type="email" placeholder="Enter your email address" class="w-full bg-transparent border-none focus:outline-none text-white px-4 py-3 sm:py-2 placeholder-gray-500" required>
                 <button id="waitlistBtn" class="w-full sm:w-auto mt-2 sm:mt-0 bg-primary text-midnight font-bold px-6 py-3 rounded-xl hover:bg-opacity-90 transition-all whitespace-nowrap">
                     Request Access
                 </button>
@@ -239,26 +239,70 @@
 
     <!-- Interactive Scripts -->
     <script>
-        // 1. Waitlist Button Logic
-        document.getElementById('waitlistBtn').addEventListener('click', function() {
-            const input = document.querySelector('input[type="email"]');
-            if (input.value.includes('@')) {
-                const btn = this;
-                const originalText = btn.innerText;
-                
-                btn.innerText = "Added to Waitlist!";
-                btn.classList.add('bg-accent', 'text-white');
-                btn.classList.remove('bg-primary', 'text-midnight');
-                input.value = '';
-                
-                setTimeout(() => {
-                    btn.innerText = originalText;
-                    btn.classList.remove('bg-accent', 'text-white');
-                    btn.classList.add('bg-primary', 'text-midnight');
-                }, 3000);
-            } else {
+        // =========================================================================
+        // 1. SUPABASE WAITLIST CONFIGURATION
+        // Paste your public anon key from commodity_mobile/supabase.js below!
+        // =========================================================================
+        const SUPABASE_URL = "https://eojuzmmivyurflgcthur.supabase.co";
+        const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVvanV6bW1pdnl1cmZsZ2N0aHVyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMwNTc1MjcsImV4cCI6MjEwODYzMzUyN30.pzcV-l-AVPUefa5RooXX8idnwaS07AgZ2mwpwsm8fMA";
+
+        const waitlistBtn = document.getElementById('waitlistBtn');
+        const waitlistInput = document.getElementById('waitlistEmail');
+
+        async function submitWaitlistEmail() {
+            const email = waitlistInput.value.trim().toLowerCase();
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!emailRegex.test(email)) {
                 alert("Please enter a valid email address.");
+                return;
             }
+
+            const originalText = waitlistBtn.innerText;
+            waitlistBtn.innerText = "Securing Spot...";
+            waitlistBtn.disabled = true;
+
+            try {
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/waitlist`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'apikey': SUPABASE_ANON_KEY,
+                        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+                        'Prefer': 'return=minimal'
+                    },
+                    body: JSON.stringify({ email: email })
+                });
+
+                // 201 = Created, 409 = Already on the waitlist (Unique constraint)
+                if (response.ok || response.status === 409) {
+                    waitlistBtn.innerText = response.status === 409 ? "Already on Waitlist!" : "Added to Waitlist!";
+                    waitlistBtn.classList.add('bg-accent', 'text-white');
+                    waitlistBtn.classList.remove('bg-primary', 'text-midnight');
+                    waitlistInput.value = '';
+                } else {
+                    const errText = await response.text();
+                    console.error("Supabase Error:", errText);
+                    alert("Could not save email right now. Please try again or email support@commoditysmarts.com.");
+                    waitlistBtn.innerText = originalText;
+                }
+            } catch (err) {
+                console.error("Network Error:", err);
+                alert("Network error. Please check your connection and try again.");
+                waitlistBtn.innerText = originalText;
+            } finally {
+                waitlistBtn.disabled = false;
+                setTimeout(() => {
+                    waitlistBtn.innerText = "Request Access";
+                    waitlistBtn.classList.remove('bg-accent', 'text-white');
+                    waitlistBtn.classList.add('bg-primary', 'text-midnight');
+                }, 3500);
+            }
+        }
+
+        waitlistBtn.addEventListener('click', submitWaitlistEmail);
+        waitlistInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') submitWaitlistEmail();
         });
 
         // 2. Lightbox Modal Logic
@@ -303,7 +347,7 @@
                         <h3 class="text-white font-semibold text-base">Support Hours & Response Time</h3>
                         <p>We review all support tickets Monday through Friday during standard U.S. market hours. Please allow up to <strong>24–48 business hours</strong> for a detailed response.</p>
                         
-                        <h3 class="text-white font-semibold text-base pt-2">Account & DataDeletion Requests</h3>
+                        <h3 class="text-white font-semibold text-base pt-2">Account & Data Deletion Requests</h3>
                         <p>To request permanent deletion of your account or waitlist email record, simply email <a href="mailto:support@commoditysmarts.com" class="text-primary hover:underline">support@commoditysmarts.com</a> from the email address associated with your account with the subject line <strong>"Account Deletion Request"</strong>.</p>
                     </div>
                 `
