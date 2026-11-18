@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commodity Smarts | Quant Analysis for the Commodity Retail Trader</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        midnight: '#0A0F1A',
+                        panel: '#131B2B',
+                        primary: '#4DA8DA',
+                        accent: '#4CAF50'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #0A0F1A; 
+        }
+        
+        .glass-panel {
+            background: rgba(19, 27, 43, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Custom Blue & White Scrollbar for the Gallery */
+        #gallery::-webkit-scrollbar {
+            height: 14px;
+        }
+        #gallery::-webkit-scrollbar-track {
+            background: #ffffff;
+            border-radius: 100px;
+            margin: 0 15px; /* Adds a small gap on the left and right */
+        }
+        #gallery::-webkit-scrollbar-thumb {
+            background-color: #4DA8DA; /* Matches your Request Access button */
+            border-radius: 100px;
+            border: 3px solid #ffffff; /* Creates a clean, padded border effect */
+        }
+    </style>
+</head>
+<body class="text-white font-sans antialiased min-h-screen flex flex-col relative">
+    
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-panel border-b-0 border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <!-- Empty div to keep the flex spacing aligned correctly after removing the logo -->
+                <div class="flex items-center gap-2"></div>
+                
+                <a href="#waitlist" class="bg-primary/10 text-primary border border-primary/20 px-6 py-2.5 rounded-full font-medium hover:bg-primary hover:text-midnight transition-all duration-300">
+                    Join Beta
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow pt-32 pb-20">
+        <!-- Hero Section -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            
+            <h1 class="text-5xl md:text-7xl font-bold tracking-tight mb-6">
+                <span class="block text-white mb-2">Commodity Smarts</span>
+                <span class="block text-3xl md:text-4xl text-primary font-medium">Quant Analysis for the Commodity Retail Trader</span>
+            </h1>
+            
+            <p class="mt-6 max-w-2xl mx-auto text-lg md:text-xl text-white mb-10 leading-relaxed">
+                Stop Guessing! Technical, Fundamental, Seasonal and A.I. driven analysis for commodities in the palm of your hand.
+            </p>
+
+            <!-- Scrolling Screenshot Gallery (With Clickable Lightbox Feature) -->
+            <div class="relative max-w-[1400px] mx-auto mt-16 mb-12">
+                <div id="gallery" class="flex overflow-x-auto gap-6 pb-6 snap-x snap-mandatory scroll-smooth px-4 sm:px-8">
+                    <!-- Image 1: Live Chart -->
+                    <div class="snap-center shrink-0 w-[280px] h-[580px] rounded-[2rem] overflow-hidden border-[6px] border-slate-900 shadow-2xl bg-[#0A0F1A]">
+                        <img src="./images/pic1.png" alt="Live Chart" class="w-full h-full object-contain cursor-pointer hover:opacity-80 hover:scale-105 transition-all duration-300" onclick="openModal(this.src)">
+                    </div>
+                    <!-- Image 2: Contract Specs -->
+                    <div class="snap-center shrink-0 w-[280px] h-[580px] rounded-[2rem] overflow-hidden border-[6px] border-slate-900 shadow-2xl bg-[#0A0F1A]">
+                        <img src="./images/pic2.png" alt="Contract Specifications" class="w-full h-full object-contain cursor-pointer hover:opacity-80 hover:scale-105 transition-all duration-300" onclick="openModal(this.src)">
+                    </div>
+                    <!-- Image 3: Technical Analysis -->
+                    <div class="snap-center shrink-0 w-[280px] h-[580px] rounded-[2rem] overflow-hidden border-[6px] border-slate-900 shadow-2xl bg-[#0A0F1A]">
+                        <img src="./images/pic3.png" alt="Technical Analysis" class="w-full h-full object-contain cursor-pointer hover:opacity-80 hover:scale-105 transition-all duration-300" onclick="openModal(this.src)">
+                    </div>
+                    <!-- Image 4: Seasonal Profile -->
+                    <div class="snap-center shrink-0 w-[280px] h-[580px] rounded-[2rem] overflow-hidden border-[6px] border-slate-900 shadow-2xl bg-[#0A0F1A]">
+                        <img src="./images/pic4.png" alt="Seasonal Profile" class="w-full h-full object-contain cursor-pointer hover:opacity-80 hover:scale-105 transition-all duration-300" onclick="openModal(this.src)">
+                    </div>
+                    <!-- Image 5: Fundamental Analysis -->
+                    <div class="snap-center shrink-0 w-[280px] h-[580px] rounded-[2rem] overflow-hidden border-[6px] border-slate-900 shadow-2xl bg-[#0A0F1A]">
+                        <img src="./images/pic5.png" alt="Fundamental Analysis" class="w-full h-full object-contain cursor-pointer hover:opacity-80 hover:scale-105 transition-all duration-300" onclick="openModal(this.src)">
+                    </div>
+                    <!-- Image 6: AI Analysis -->
+                    <div class="snap-center shrink-0 w-[280px] h-[580px] rounded-[2rem] overflow-hidden border-[6px] border-slate-900 shadow-2xl bg-[#0A0F1A]">
+                        <img src="./images/pic6.png" alt="AI Analysis" class="w-full h-full object-contain cursor-pointer hover:opacity-80 hover:scale-105 transition-all duration-300" onclick="openModal(this.src)">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Live Data Tag -->
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border-primary/20 mb-8">
+                <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                <span class="text-sm font-medium text-gray-300">Live Institutional Data Feed</span>
+            </div>
+
+            <!-- Waitlist Capture -->
+            <div id="waitlist" class="w-full max-w-md mx-auto glass-panel p-2 rounded-2xl flex flex-col sm:flex-row items-center shadow-2xl shadow-primary/10 scroll-mt-40 mb-6">
+                <input type="email" placeholder="Enter your email address" class="w-full bg-transparent border-none focus:outline-none text-white px-4 py-3 sm:py-2 placeholder-gray-500" required>
+                <button id="waitlistBtn" class="w-full sm:w-auto mt-2 sm:mt-0 bg-primary text-midnight font-bold px-6 py-3 rounded-xl hover:bg-opacity-90 transition-all whitespace-nowrap">
+                    Request Access
+                </button>
+            </div>
+            <p class="text-sm text-gray-500">iOS App Store beta launching soon. Spots are limited.</p>
+            
+        </div>
+    </main>
+
+    <!-- Feature Grid -->
+    <section class="max-w-7xl mx-auto px-6 py-20">
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Feature 1 -->
+            <div class="glass-panel p-8 rounded-3xl">
+                <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-6 border border-primary/20">
+                    <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                </div>
+                <h3 class="text-xl font-bold mb-3">15-Year Seasonal Math</h3>
+                <p class="text-gray-400 leading-relaxed">Instantly view historical monthly win-rates, cycle peaks, and volatility seasonality parsed from 15 years of market data.</p>
+            </div>
+            
+            <!-- Feature 2 -->
+            <div class="glass-panel p-8 rounded-3xl">
+                <div class="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center mb-6 border border-accent/20">
+                    <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </div>
+                <h3 class="text-xl font-bold mb-3">Real-Time Market Data</h3>
+                <p class="text-gray-400 leading-relaxed">Direct API integration for to-the-tick live prices, Open Interest, and accurate 30-Day Volume Profile POC.</p>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="glass-panel p-8 rounded-3xl">
+                <div class="w-12 h-12 bg-yellow-500/10 rounded-xl flex items-center justify-center mb-6 border border-yellow-500/20">
+                    <svg class="w-6 h-6 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                </div>
+                <h3 class="text-xl font-bold mb-3">Fundamental Analysis</h3>
+                <p class="text-gray-400 leading-relaxed">Track institutional Smart Money with weekly CFTC COT data, Wyckoff phases, curve structures, and critical macroeconomic reports.</p>
+            </div>
+
+            <!-- Feature 4 -->
+            <div class="glass-panel p-8 rounded-3xl">
+                <div class="w-12 h-12 bg-purple-500/10 rounded-xl flex items-center justify-center mb-6 border border-purple-500/20">
+                    <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+                </div>
+                <h3 class="text-xl font-bold mb-3">AI Analyst Chat</h3>
+                <p class="text-gray-400 leading-relaxed">A quantitative AI model trained to interpret the convergence of technicals, seasonality, and volume data on demand.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="mt-auto border-t border-white/10 py-12 bg-midnight">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+            <div class="mb-4 md:mb-0">
+                <p>&copy; 2026 Commodity Smarts LLC. All rights reserved.</p>
+            </div>
+            <div class="flex space-x-6">
+                <a href="#" class="hover:text-primary transition-colors">Support</a>
+                <a href="#" class="hover:text-primary transition-colors">Privacy Policy</a>
+                <a href="#" class="hover:text-primary transition-colors">Terms of Service</a>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 mt-8 text-xs text-gray-600 text-center md:text-left leading-relaxed">
+            <p><strong>CFTC RULE 4.41</strong> - HYPOTHETICAL OR SIMULATED PERFORMANCE RESULTS HAVE CERTAIN LIMITATIONS. UNLIKE AN ACTUAL PERFORMANCE RECORD, SIMULATED RESULTS DO NOT REPRESENT ACTUAL TRADING. ALSO, SINCE THE TRADES HAVE NOT BEEN EXECUTED, THE RESULTS MAY HAVE UNDER-OR-OVER COMPENSATED FOR THE IMPACT, IF ANY, OF CERTAIN MARKET FACTORS, SUCH AS LACK OF LIQUIDITY. NO REPRESENTATION IS BEING MADE THAT ANY ACCOUNT WILL OR IS LIKELY TO ACHIEVE PROFIT OR LOSSES SIMILAR TO THOSE SHOWN.</p>
+            <p class="mt-2">Trading futures and options involves substantial risk of loss and is not suitable for all investors. Past performance is not necessarily indicative of future results.</p>
+        </div>
+    </footer>
+
+    <!-- Fullscreen Image Modal (Lightbox) -->
+    <div id="imageModal" class="fixed inset-0 z-[100] hidden bg-black/95 flex items-center justify-center p-4 backdrop-blur-sm transition-opacity" onclick="closeModal()">
+        <!-- Close Button -->
+        <button class="absolute top-6 right-6 text-gray-400 hover:text-white transition-colors focus:outline-none" onclick="closeModal()">
+            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+        <!-- The Expanded Image -->
+        <img id="modalImage" src="" alt="Expanded View" class="max-w-full max-h-[90vh] object-contain rounded-[2rem] border-[6px] border-slate-800 shadow-2xl" onclick="event.stopPropagation()">
+    </div>
+
+    <!-- Interactive Scripts -->
+    <script>
+        // 1. Waitlist Button Logic
+        document.getElementById('waitlistBtn').addEventListener('click', function() {
+            const input = document.querySelector('input[type="email"]');
+            if (input.value.includes('@')) {
+                const btn = this;
+                const originalText = btn.innerText;
+                
+                btn.innerText = "Added to Waitlist!";
+                btn.classList.add('bg-accent', 'text-white');
+                btn.classList.remove('bg-primary', 'text-midnight');
+                input.value = '';
+                
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.classList.remove('bg-accent', 'text-white');
+                    btn.classList.add('bg-primary', 'text-midnight');
+                }, 3000);
+            } else {
+                alert("Please enter a valid email address.");
+            }
+        });
+
+        // 2. Lightbox Modal Logic
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+
+        // Opens the modal when an image is clicked
+        function openModal(imageSrc) {
+            modalImg.src = imageSrc;
+            modal.classList.remove('hidden');
+            // Prevent scrolling on the main page while the modal is open
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        // Closes the modal when clicking outside the image or on the X
+        function closeModal() {
+            modal.classList.add('hidden');
+            modalImg.src = '';
+            // Restore scrolling to the main page
+            document.body.style.overflow = 'auto'; 
+        }
+    </script>
+</body>
+</html>
