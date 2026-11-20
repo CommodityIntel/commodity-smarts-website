@@ -139,7 +139,7 @@
                     Request Access
                 </button>
             </div>
-            <p class="text-sm text-gray-500">iOS App Store beta launching soon. Spots are limited.</p>
+            <p class="text-sm text-gray-500">iOS & Android beta launching soon. Spots are limited.</p>
             
         </div>
     </main>
@@ -191,10 +191,11 @@
             <div class="mb-4 md:mb-0">
                 <p>&copy; 2026 Commodity Smarts LLC. All rights reserved.</p>
             </div>
-            <div class="flex space-x-6">
+            <div class="flex flex-wrap justify-center gap-x-6 gap-y-2">
                 <button onclick="openInfoModal('support')" class="hover:text-primary transition-colors focus:outline-none">Support</button>
                 <button onclick="openInfoModal('privacy')" class="hover:text-primary transition-colors focus:outline-none">Privacy Policy</button>
                 <button onclick="openInfoModal('terms')" class="hover:text-primary transition-colors focus:outline-none">Terms of Service</button>
+                <button onclick="openInfoModal('delete-account')" class="hover:text-primary transition-colors focus:outline-none">Account Deletion</button>
             </div>
         </div>
         <div class="max-w-7xl mx-auto px-6 mt-8 text-xs text-gray-600 text-center md:text-left leading-relaxed">
@@ -211,7 +212,7 @@
         <img id="modalImage" src="" alt="Expanded View" class="max-w-full max-h-[90vh] object-contain rounded-[2rem] border-[6px] border-slate-800 shadow-2xl" onclick="event.stopPropagation()">
     </div>
 
-    <!-- Support, Privacy Policy & Terms of Service Modal -->
+    <!-- Support, Privacy Policy, Terms & Account Deletion Modal -->
     <div id="infoModal" class="fixed inset-0 z-[110] hidden bg-black/85 flex items-center justify-center p-4 sm:p-6 backdrop-blur-md" onclick="closeInfoModal()">
         <div class="glass-panel w-full max-w-3xl rounded-3xl border border-white/15 shadow-2xl overflow-hidden flex flex-col max-h-[85vh]" onclick="event.stopPropagation()">
             
@@ -241,10 +242,10 @@
     <script>
         // =========================================================================
         // 1. SUPABASE WAITLIST CONFIGURATION
-        // Paste your public anon key from commodity_mobile/supabase.js below!
+        // Keep your public anon/publishable key from commodity_mobile/supabase.js here!
         // =========================================================================
         const SUPABASE_URL = "https://eojuzmmivyurflgcthur.supabase.co";
-        const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVvanV6bW1pdnl1cmZsZ2N0aHVyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMwNTc1MjcsImV4cCI6MjEwODYzMzUyN30.pzcV-l-AVPUefa5RooXX8idnwaS07AgZ2mwpwsm8fMA";
+        const SUPABASE_ANON_KEY = "PASTE_YOUR_SUPABASE_ANON_KEY_HERE";
 
         const waitlistBtn = document.getElementById('waitlistBtn');
         const waitlistInput = document.getElementById('waitlistEmail');
@@ -321,7 +322,7 @@
             document.body.style.overflow = 'auto'; 
         }
 
-        // 3. Support, Privacy Policy & Terms of Service Content & Logic
+        // 3. Support, Privacy Policy, Terms & Account Deletion Content & Logic
         const infoModal = document.getElementById('infoModal');
         const infoModalTitle = document.getElementById('infoModalTitle');
         const infoModalBody = document.getElementById('infoModalBody');
@@ -331,7 +332,7 @@
                 title: "Customer & Beta Support",
                 html: `
                     <p class="text-white text-lg font-medium">Need assistance with Commodity Smarts?</p>
-                    <p>Whether you have a question about our quantitative indicators, CFTC COT data feeds, subscription billing, or iOS Beta access, our team is ready to help.</p>
+                    <p>Whether you have a question about our quantitative indicators, CFTC COT data feeds, subscription billing, or mobile app access, our team is ready to help.</p>
                     
                     <div class="bg-midnight/90 border border-primary/30 rounded-2xl p-6 my-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                         <div>
@@ -347,9 +348,42 @@
                         <h3 class="text-white font-semibold text-base">Support Hours & Response Time</h3>
                         <p>We review all support tickets Monday through Friday during standard U.S. market hours. Please allow up to <strong>24–48 business hours</strong> for a detailed response.</p>
                         
-                        <h3 class="text-white font-semibold text-base pt-2">Account & Data Deletion Requests</h3>
-                        <p>To request permanent deletion of your account or waitlist email record, simply email <a href="mailto:support@commoditysmarts.com" class="text-primary hover:underline">support@commoditysmarts.com</a> from the email address associated with your account with the subject line <strong>"Account Deletion Request"</strong>.</p>
+                        <h3 class="text-white font-semibold text-base pt-2">Account & Data Deletion</h3>
+                        <p>You can permanently delete your account instantly inside the mobile app under <strong>Settings &rarr; Delete Account</strong>, or view full web deletion instructions on our <button onclick="openInfoModal('delete-account')" class="text-primary hover:underline font-medium">Account Deletion page</button>.</p>
                     </div>
+                `
+            },
+            'delete-account': {
+                title: "Account & Data Deletion — Commodity Smarts",
+                html: `
+                    <p class="text-xs text-gray-400"><strong>App:</strong> Commodity Smarts (iOS & Android) &nbsp;|&nbsp; <strong>Developer:</strong> Commodity Smarts LLC</p>
+
+                    <p>Commodity Smarts LLC gives you complete control over your account and personal data. You can permanently delete your account immediately inside the mobile app or request deletion online if you no longer have the app installed.</p>
+
+                    <div class="bg-midnight/90 border border-primary/30 rounded-2xl p-5 space-y-2">
+                        <h3 class="text-white font-semibold text-base">Option 1: Instant In-App Deletion (Recommended)</h3>
+                        <ol class="list-decimal pl-5 space-y-1 text-gray-300">
+                            <li>Open the <strong>Commodity Smarts</strong> mobile app and sign in.</li>
+                            <li>Tap the <strong>Settings</strong> gear icon in the top-right corner.</li>
+                            <li>Scroll down and tap <strong>Delete Account</strong>, then confirm <strong>Delete Permanently</strong>.</li>
+                        </ol>
+                        <p class="text-xs text-primary pt-1">Your account and associated records are permanently purged immediately.</p>
+                    </div>
+
+                    <div class="bg-midnight/90 border border-white/10 rounded-2xl p-5 space-y-3">
+                        <h3 class="text-white font-semibold text-base">Option 2: Request Deletion Without the App Installed</h3>
+                        <p>If you have uninstalled Commodity Smarts and want your account deleted, email our support team from the email address associated with your account:</p>
+                        <a href="mailto:support@commoditysmarts.com?subject=Account%20Deletion%20Request&body=Please%20permanently%20delete%20my%20Commodity%20Smarts%20account%20and%20all%20associated%20data." class="inline-block bg-primary/15 text-primary border border-primary/30 px-4 py-2.5 rounded-xl text-sm font-semibold hover:bg-primary hover:text-midnight transition-all">
+                            Email support@commoditysmarts.com to Delete Account
+                        </a>
+                        <p class="text-xs text-gray-400">Web deletion requests are verified and permanently processed within <strong>48 business hours</strong>.</p>
+                    </div>
+
+                    <h3 class="text-white font-semibold text-base pt-2">What Data Is Deleted vs. Retained</h3>
+                    <ul class="list-disc pl-5 space-y-1">
+                        <li><strong>Permanently Deleted:</strong> Your user account, email address, encrypted authentication credentials, active login sessions, AI usage counter records, and waitlist email entry (if present).</li>
+                        <li><strong>Retained by Platform Billing Providers:</strong> If you purchased an active subscription via the Apple App Store or Google Play, those stores retain statutory billing/tax transaction records independently. <em>Deleting your Commodity Smarts account does not automatically cancel an active App Store or Google Play subscription—please cancel active subscriptions in your device settings.</em></li>
+                    </ul>
                 `
             },
             privacy: {
@@ -374,11 +408,11 @@
                     <ul class="list-disc pl-5 space-y-1">
                         <li><strong>Supabase:</strong> Secure cloud database and user authentication encryption.</li>
                         <li><strong>Google Gemini API:</strong> Quantitative AI prompt processing (no personal user identity is shared with the AI model).</li>
-                        <li><strong>Apple / Subscription Processors:</strong> For handling iOS App Store in-app purchases and subscription validation.</li>
+                        <li><strong>Apple / Google / RevenueCat:</strong> For handling iOS App Store and Google Play in-app purchases and subscription validation.</li>
                     </ul>
 
                     <h3 class="text-white font-semibold text-base pt-2">4. Your California Privacy Rights (CCPA) & Data Deletion</h3>
-                    <p>You have the right to request access to, correction of, or complete deletion of your personal data at any time. To exercise these rights or permanently delete your account, please contact us at <a href="mailto:support@commoditysmarts.com" class="text-primary hover:underline">support@commoditysmarts.com</a>.</p>
+                    <p>You have the right to request access to, correction of, or complete deletion of your personal data at any time. You can delete your account instantly inside the app under <strong>Settings &rarr; Delete Account</strong>, or submit a web deletion request via our <button onclick="openInfoModal('delete-account')" class="text-primary hover:underline">Account Deletion page</button> or by emailing <a href="mailto:support@commoditysmarts.com" class="text-primary hover:underline">support@commoditysmarts.com</a>.</p>
 
                     <h3 class="text-white font-semibold text-base pt-2">5. Contact Us</h3>
                     <p>If you have any questions about this Privacy Policy, please contact Commodity Smarts LLC at <a href="mailto:support@commoditysmarts.com" class="text-primary hover:underline">support@commoditysmarts.com</a>.</p>
@@ -401,7 +435,7 @@
                     <p>Our Service utilizes large language models and third-party financial APIs (including exchange quotes and government CFTC/FRED datasets). While we strive for institutional accuracy, market feeds may be delayed or interrupted, and AI models can occasionally produce inaccurate or conflicting interpretations. Always verify contract specifications and live prices directly with your licensed brokerage platform before executing any trade.</p>
 
                     <h3 class="text-white font-semibold text-base pt-2">4. Accounts & Subscriptions</h3>
-                    <p>Free accounts are subject to usage limits on AI analysis and chat features. Paid Pro subscriptions are billed on a recurring monthly basis through the Apple App Store and may be canceled at any time through your device's subscription settings.</p>
+                    <p>Free accounts are subject to usage limits on AI analysis and chat features. Paid Pro subscriptions are billed on a recurring monthly basis through the Apple App Store or Google Play and may be canceled at any time through your device's subscription settings.</p>
 
                     <h3 class="text-white font-semibold text-base pt-2">5. Limitation of Liability & Governing Law</h3>
                     <p>To the maximum extent permitted by law, Commodity Smarts LLC shall not be liable for any trading losses, lost profits, or indirect damages arising from your reliance on the Service. These Terms are governed by the laws of the State of California.</p>
@@ -437,7 +471,7 @@
             }, 2000);
         }
 
-        // Automatically open Support, Privacy, or Terms if someone visits #support, #privacy, or #terms directly (Ideal for Apple App Store URLs!)
+        // Automatically open Support, Privacy, Terms, or Delete Account via URL hash (Ideal for Apple & Google Store URLs!)
         window.addEventListener('DOMContentLoaded', () => {
             const hash = window.location.hash.replace('#', '').toLowerCase();
             if (modalContents[hash]) {
